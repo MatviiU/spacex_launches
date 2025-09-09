@@ -9,7 +9,12 @@ class LaunchesRepository {
   Future<List<LaunchEntity>> getLaunches() async {
     try {
       final launches = await launchesDataSource.getLaunches();
-      return launches.map(LaunchEntity.fromDto).toList();
+      final entities = launches
+          .map(LaunchEntity.fromDto)
+          .toList();
+      final filteredEntities = entities.where((entity) =>
+      entity.flickrImages.isNotEmpty).toList();
+      return filteredEntities;
     } on Exception catch (e) {
       throw Exception('(LaunchesRepository): Error getting launches: $e');
     }

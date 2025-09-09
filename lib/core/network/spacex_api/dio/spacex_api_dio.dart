@@ -11,7 +11,7 @@ class SpaceXApiDio implements SpaceXApiBase {
   Future<List<LaunchesDTO>> getLaunches() async {
     try {
       final response = await dio.get<List<dynamic>>(
-        'https://api.spacexdata.com/v3/launches',
+        '/launches',
       );
 
       final data = response.data!;
