@@ -53,9 +53,6 @@ class SliderWidget extends StatelessWidget {
           height: 10,
           child: BlocBuilder<LaunchesCubit, LaunchesState>(
             builder: (context, state) {
-              if (state.flickrImages.isEmpty) {
-                return const SizedBox.shrink();
-              }
               final activeDotIndex = state.currentImageIndex % 4;
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
