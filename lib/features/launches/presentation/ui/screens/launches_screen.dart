@@ -26,11 +26,14 @@ class LaunchesScreen extends StatelessWidget {
       ),
       body: BlocBuilder<LaunchesCubit, LaunchesState>(
         builder: (context, state) {
-          return switch(state.status){
-            LaunchesStatus.initial || LaunchesStatus.loading =>
-            const Center(child: CircularProgressIndicator()),
-            LaunchesStatus.success => const LaunchesView(),
-            LaunchesStatus.error => Center(child: Text(state.errorMessage!)),
+          return switch (state.rocketsStatus) {
+            DataStatus.initial || DataStatus.loading => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            DataStatus.success => const LaunchesView(),
+            DataStatus.error => Center(
+              child: Text('Error getting rockets ${state.errorMessage}'),
+            ),
           };
         },
       ),

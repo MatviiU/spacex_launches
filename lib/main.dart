@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.getIt<LaunchesCubit>()..getLaunches(),
+      create: (context) =>
+          di.getIt<LaunchesCubit>()..getRocketsAndInitialLaunches(),
       child: const MaterialApp(
         title: 'SpaceX launches',
         home: LaunchesScreen(),
