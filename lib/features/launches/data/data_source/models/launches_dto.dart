@@ -27,4 +27,5 @@ class LaunchesDTO {
   final LaunchSiteDTO? launchSite;
   @JsonKey(name: 'links')
   final LinksDTO? links;
+
 }

@@ -7,6 +7,7 @@ class LaunchEntity {
     required this.launchDateLocal,
     required this.launchSite,
     required this.flickrImages,
+    this.wikipedia,
   });
 
   factory LaunchEntity.fromDto(LaunchesDTO dto) {
@@ -17,6 +18,7 @@ class LaunchEntity {
       launchDateLocal: date,
       launchSite: dto.launchSite?.siteNameLong ?? '',
       flickrImages: dto.links?.flickrImages ?? [],
+      wikipedia: dto.links?.wikipedia ?? '',
     );
   }
 
@@ -25,4 +27,5 @@ class LaunchEntity {
   final DateTime launchDateLocal;
   final String launchSite;
   final List<String> flickrImages;
+  final String? wikipedia;
 }
