@@ -1,13 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spacex_launches/features/launches/data/repository/models/rocket_entity.dart';
 import 'package:spacex_launches/features/launches/presentation/cubit/launches_cubit.dart';
 import 'package:spacex_launches/features/launches/presentation/cubit/launches_state.dart';
 
 class SliderWidget extends StatelessWidget {
-  const SliderWidget({required this.flickrImages, super.key});
+  const SliderWidget({required this.rockets, super.key});
 
-  final List<String> flickrImages;
+  final List<RocketEntity> rockets;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +17,18 @@ class SliderWidget extends StatelessWidget {
       spacing: 16,
       children: [
         CarouselSlider.builder(
-          itemCount: flickrImages.length,
+          itemCount: rockets.length,
           carouselController: cubit.carouselController,
           itemBuilder: (context, index, realIndex) {
+            final imageUrl = rockets[index].flickrImages.isNotEmpty
+                ? rockets[index].flickrImages.first
+                : '';
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  flickrImages[index],
+                  imageUrl,
                   fit: BoxFit.cover,
                   width: double.infinity,
                   loadingBuilder: (context, child, loadingProgress) {
@@ -42,7 +46,7 @@ class SliderWidget extends StatelessWidget {
             viewportFraction: 0.78,
             enableInfiniteScroll: false,
             enlargeCenterPage: true,
-            onPageChanged: (index, reason) => cubit.onImageChanged(index),
+            onPageChanged: (index, reason) => cubit.onRocketSelected(index),
           ),
         ),
         SizedBox(
